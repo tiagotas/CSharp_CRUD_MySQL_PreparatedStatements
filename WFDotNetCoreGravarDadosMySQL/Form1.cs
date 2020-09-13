@@ -31,6 +31,8 @@ namespace WFDotNetCoreGravarDadosMySQL
             lst_contatos.Columns.Add("Nome", 150, HorizontalAlignment.Left);
             lst_contatos.Columns.Add("E-mail", 150, HorizontalAlignment.Left);
             lst_contatos.Columns.Add("Telefone", 150, HorizontalAlignment.Left);
+
+            carregar_contatos();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -60,6 +62,11 @@ namespace WFDotNetCoreGravarDadosMySQL
                                 "Sucesso!", MessageBoxButtons.OK,
                                 MessageBoxIcon.Information);
 
+                txtNome.Text = String.Empty;
+                txtEmail.Text = "";
+                txtTelefone.Text = "";
+
+                carregar_contatos();
 
             } catch (MySqlException ex)
             {
@@ -86,21 +93,17 @@ namespace WFDotNetCoreGravarDadosMySQL
         {
             try
             {
-                string q = "'%" + txt_buscar.Text + "%'";
-
-                // Criar conexão com MySQL
                 Conexao = new MySqlConnection(data_source);
-
-                string sql = "SELECT * " +
-                            "FROM contato " +
-                            "WHERE nome LIKE " + q + "OR email LIKE " + q;
-
                 Conexao.Open();
 
-                // Executar Comando Insert
-                MySqlCommand comando = new MySqlCommand(sql, Conexao);
+                MySqlCommand cmd = new MySqlCommand();
 
-                MySqlDataReader reader = comando.ExecuteReader();
+                cmd.Connection = Conexao;
+                cmd.CommandText = "SELECT * FROM contato WHERE nome LIKE @q OR email LIKE @q ";
+                cmd.Prepare();
+                cmd.Parameters.AddWithValue("@q", "%" + txt_buscar.Text + "%");
+
+                MySqlDataReader reader = cmd.ExecuteReader();
 
                 lst_contatos.Items.Clear();
 
@@ -114,20 +117,76 @@ namespace WFDotNetCoreGravarDadosMySQL
                         reader.GetString(3),
                     };
 
-                    var linha_listview = new ListViewItem(row);
-
-                    lst_contatos.Items.Add(linha_listview);
+                    lst_contatos.Items.Add(new ListViewItem(row));
                 }
+            } catch (MySqlException ex)
+            {
+                MessageBox.Show("Erro " + ex.Number + " ocorreu: " + ex.Message,
+                                "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);                
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Ocorreu: " + ex.Message,
+                                "Erro", MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+            } finally
+            {
+                Conexao.Close();
+            }
+        }
 
+        private void carregar_contatos()
+        {
+            try
+            {
+                Conexao = new MySqlConnection(data_source);
+                Conexao.Open();
+
+                MySqlCommand cmd = new MySqlCommand();
+
+                cmd.Connection = Conexao;
+                cmd.CommandText = "SELECT * FROM contato ORDER BY id DESC ";
+                cmd.Prepare();
+
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                lst_contatos.Items.Clear();
+
+                while (reader.Read())
+                {
+                    string[] row =
+                    {
+                        reader.GetString(0),
+                        reader.GetString(1),
+                        reader.GetString(2),
+                        reader.GetString(3),
+                    };
+
+                    lst_contatos.Items.Add(new ListViewItem(row));
+                }
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Erro " + ex.Number + " ocorreu: " + ex.Message,
+                                "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocorreu: " + ex.Message,
+                                "Erro", MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
             }
             finally
             {
                 Conexao.Close();
             }
+        }
+
+
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

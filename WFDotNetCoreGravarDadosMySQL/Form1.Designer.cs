@@ -120,7 +120,7 @@
             this.lst_contatos.HideSelection = false;
             this.lst_contatos.Location = new System.Drawing.Point(215, 61);
             this.lst_contatos.Name = "lst_contatos";
-            this.lst_contatos.Size = new System.Drawing.Size(498, 97);
+            this.lst_contatos.Size = new System.Drawing.Size(498, 289);
             this.lst_contatos.TabIndex = 9;
             this.lst_contatos.UseCompatibleStateImageBehavior = false;
             // 
@@ -132,13 +132,14 @@
             this.button2.TabIndex = 10;
             this.button2.Text = "Buscar";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
             this.button2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.button2_MouseClick);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(725, 212);
+            this.ClientSize = new System.Drawing.Size(725, 362);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.lst_contatos);
             this.Controls.Add(this.txt_buscar);
@@ -151,7 +152,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Agenda de Contatos C# com MySQL";
             this.ResumeLayout(false);
             this.PerformLayout();
 
