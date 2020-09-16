@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -38,8 +39,12 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txt_buscar = new System.Windows.Forms.TextBox();
             this.lst_contatos = new System.Windows.Forms.ListView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -73,26 +78,26 @@
             // 
             this.txtNome.Location = new System.Drawing.Point(13, 32);
             this.txtNome.Name = "txtNome";
-            this.txtNome.Size = new System.Drawing.Size(184, 23);
+            this.txtNome.Size = new System.Drawing.Size(363, 23);
             this.txtNome.TabIndex = 3;
             // 
             // txtTelefone
             // 
             this.txtTelefone.Location = new System.Drawing.Point(13, 76);
             this.txtTelefone.Name = "txtTelefone";
-            this.txtTelefone.Size = new System.Drawing.Size(184, 23);
+            this.txtTelefone.Size = new System.Drawing.Size(363, 23);
             this.txtTelefone.TabIndex = 4;
             // 
             // txtEmail
             // 
             this.txtEmail.Location = new System.Drawing.Point(13, 120);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(184, 23);
+            this.txtEmail.Size = new System.Drawing.Size(363, 23);
             this.txtEmail.TabIndex = 5;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(122, 149);
+            this.button1.Location = new System.Drawing.Point(301, 149);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 6;
@@ -103,7 +108,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(215, 13);
+            this.label4.Location = new System.Drawing.Point(382, 13);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(45, 15);
             this.label4.TabIndex = 7;
@@ -111,15 +116,16 @@
             // 
             // txt_buscar
             // 
-            this.txt_buscar.Location = new System.Drawing.Point(215, 32);
+            this.txt_buscar.Location = new System.Drawing.Point(382, 32);
             this.txt_buscar.Name = "txt_buscar";
             this.txt_buscar.Size = new System.Drawing.Size(416, 23);
             this.txt_buscar.TabIndex = 8;
             // 
             // lst_contatos
             // 
+            this.lst_contatos.ContextMenuStrip = this.contextMenuStrip1;
             this.lst_contatos.HideSelection = false;
-            this.lst_contatos.Location = new System.Drawing.Point(215, 61);
+            this.lst_contatos.Location = new System.Drawing.Point(382, 61);
             this.lst_contatos.MultiSelect = false;
             this.lst_contatos.Name = "lst_contatos";
             this.lst_contatos.Size = new System.Drawing.Size(498, 289);
@@ -127,9 +133,23 @@
             this.lst_contatos.UseCompatibleStateImageBehavior = false;
             this.lst_contatos.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lst_contatos_ItemSelectionChanged);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(110, 26);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(109, 22);
+            this.toolStripMenuItem1.Text = "Excluir";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(638, 32);
+            this.button2.Location = new System.Drawing.Point(805, 32);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 10;
@@ -140,7 +160,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(41, 150);
+            this.button3.Location = new System.Drawing.Point(13, 149);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 11;
@@ -148,11 +168,23 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(159, 149);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 12;
+            this.button4.Text = "Excluir";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Visible = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(725, 362);
+            this.ClientSize = new System.Drawing.Size(893, 362);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.lst_contatos);
@@ -167,6 +199,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Agenda de Contatos C# com MySQL";
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -186,6 +219,9 @@
         private System.Windows.Forms.ListView lst_contatos;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.Button button4;
     }
 }
 
