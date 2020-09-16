@@ -17,6 +17,8 @@ namespace WFDotNetCoreGravarDadosMySQL
         private MySqlConnection Conexao;
         private string data_source = "datasource=localhost;username=root;password=;database=db_agenda";
 
+        private int ?id_contato_selecionado = null;
+
         public Form1()
         {
             InitializeComponent();
@@ -42,26 +44,50 @@ namespace WFDotNetCoreGravarDadosMySQL
                 Conexao = new MySqlConnection(data_source);
                 Conexao.Open();
 
-
                 MySqlCommand cmd = new MySqlCommand();
 
                 cmd.Connection = Conexao;
-               
-                cmd.CommandText = "INSERT INTO contato (nome, email, telefone) " +
+
+
+                if (id_contato_selecionado == null)
+                {
+                    cmd.CommandText = "INSERT INTO contato (nome, email, telefone) " +
                                   "VALUES " +
                                   "(@nome, @email, @telefone) ";
-                cmd.Prepare();
-                
-                cmd.Parameters.AddWithValue("@nome", txtNome.Text);
-                cmd.Parameters.AddWithValue("@email", txtEmail.Text);
-                cmd.Parameters.AddWithValue("@telefone", txtTelefone.Text);
-                
-                cmd.ExecuteNonQuery();
+                    cmd.Prepare();
 
-                MessageBox.Show("Contato Inserido com Sucesso!",
-                                "Sucesso!", MessageBoxButtons.OK,
-                                MessageBoxIcon.Information);
+                    cmd.Parameters.AddWithValue("@nome", txtNome.Text);
+                    cmd.Parameters.AddWithValue("@email", txtEmail.Text);
+                    cmd.Parameters.AddWithValue("@telefone", txtTelefone.Text);
 
+                    cmd.ExecuteNonQuery();
+
+                    MessageBox.Show("Contato Inserido com Sucesso!",
+                                    "Sucesso!", MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information);
+
+                } else
+                {
+                    // Atualização de Contato
+
+                    cmd.CommandText = "UPDATE contato SET " +
+                                      "nome=@nome, email=@email, telefone=@telefone " +
+                                      "WHERE id=@id ";
+                    cmd.Prepare();
+
+                    cmd.Parameters.AddWithValue("@nome", txtNome.Text);
+                    cmd.Parameters.AddWithValue("@email", txtEmail.Text);
+                    cmd.Parameters.AddWithValue("@telefone", txtTelefone.Text);
+                    cmd.Parameters.AddWithValue("@id", id_contato_selecionado);
+
+                    cmd.ExecuteNonQuery();
+
+                    MessageBox.Show("Contato Atualizado com Sucesso!",
+                                    "Sucesso!", MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information);
+                }
+
+                id_contato_selecionado = null;
                 txtNome.Text = String.Empty;
                 txtEmail.Text = "";
                 txtTelefone.Text = "";
@@ -187,6 +213,31 @@ namespace WFDotNetCoreGravarDadosMySQL
         private void button2_Click_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void lst_contatos_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            ListView.SelectedListViewItemCollection itens_selecionados = lst_contatos.SelectedItems;
+
+            foreach(ListViewItem item in itens_selecionados)
+            {
+                id_contato_selecionado = Convert.ToInt32(item.SubItems[0].Text);
+
+                txtNome.Text = item.SubItems[1].Text;
+                txtEmail.Text = item.SubItems[2].Text;
+                txtTelefone.Text = item.SubItems[3].Text;                
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            id_contato_selecionado = null;
+
+            txtNome.Text = String.Empty;
+            txtEmail.Text = "";
+            txtTelefone.Text = "";
+            
+            txtNome.Focus();
         }
     }
 }

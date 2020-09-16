@@ -39,6 +39,7 @@
             this.txt_buscar = new System.Windows.Forms.TextBox();
             this.lst_contatos = new System.Windows.Forms.ListView();
             this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -119,10 +120,12 @@
             // 
             this.lst_contatos.HideSelection = false;
             this.lst_contatos.Location = new System.Drawing.Point(215, 61);
+            this.lst_contatos.MultiSelect = false;
             this.lst_contatos.Name = "lst_contatos";
             this.lst_contatos.Size = new System.Drawing.Size(498, 289);
             this.lst_contatos.TabIndex = 9;
             this.lst_contatos.UseCompatibleStateImageBehavior = false;
+            this.lst_contatos.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lst_contatos_ItemSelectionChanged);
             // 
             // button2
             // 
@@ -135,11 +138,22 @@
             this.button2.Click += new System.EventHandler(this.button2_Click_1);
             this.button2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.button2_MouseClick);
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(41, 150);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 11;
+            this.button3.Text = "Novo";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(725, 362);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.lst_contatos);
             this.Controls.Add(this.txt_buscar);
@@ -171,6 +185,7 @@
         private System.Windows.Forms.TextBox txt_buscar;
         private System.Windows.Forms.ListView lst_contatos;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }
 
